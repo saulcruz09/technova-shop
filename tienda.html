@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tienda - TechNova Solutions</title>
+    <link rel="stylesheet" href="estilos/estilos.css">
+</head>
+<body>
+    <header>
+        <h1>TechNova Solutions</h1>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="quienes.html">Quiénes somos</a>
+            <a href="donde.html">Dónde estamos</a>
+            <a href="referencias.html">Referencias</a>
+            <a href="tienda.html">Tienda</a>
+            <a href="carrito.html">Carrito</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Tienda online</h2>
+        <div class="productos" id="productos"></div>
+        <p><a class="btn" href="carrito.html">Ver carrito</a></p>
+    </div>
+
+    <footer>&copy; 2026 TechNova Solutions</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const supabaseUrl = "https://ialoqxiqotvtzyegvxcn.supabase.co";
+        const supabaseKey = "sb_publishable_OjbLHqZNynX8ojbqe_o3uA_zJMTwJdw";
+
+        const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+        async function cargarProductos() {
+            const { data, error } = await supabaseClient
+                .from("productos")
+                .select("*");
+
+            if (error) {
+                document.getElementById("productos").innerHTML = `<p style="color:red;">Error de Supabase: ${error.message}</p>`;
+                console.error("Error al cargar productos:", error);
+                return;
+            }
+
+            if (!data || data.length === 0) {
+                document.getElementById("productos").innerHTML = `<p style="color:orange;">Conectado a Supabase, pero la tabla 'productos' devuelve 0 filas (revisa RLS o que haya datos en la tabla).</p>`;
+                return;
+            }
+
+            const contenedor = document.getElementById("productos");
+            contenedor.innerHTML = "";
+
+            data.forEach(producto => {
+                contenedor.innerHTML += `
+                <div class="card producto">
+                    <img src="${producto.imagen}" alt="${producto.nombre}">
+                    <h3>${producto.nombre}</h3>
+                    <p>${producto.precio} €</p>
+                    <a class="btn" href="producto.html?id=${producto.id}">Ver producto</a>
+                </div>
+                `;
+            });
+        }
+
+        cargarProductos();
+    </script>
+</body>
+</html>

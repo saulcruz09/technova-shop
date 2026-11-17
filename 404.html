@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Error 404 - Página no encontrada</title>
+
+    <!-- CSS 1: hoja de estilos externa (la de toda la web) -->
+    <link rel="stylesheet" href="estilos/estilos.css">
+
+    <!-- CSS 2: hoja de estilos interna (solo para esta página) -->
+    <style>
+        .error404 { text-align: center; padding: 30px 15px; }
+
+        .numeros {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .cuatro {
+            font-family: Impact, "Arial Black", sans-serif;
+            font-size: clamp(6rem, 24vw, 12rem);
+            line-height: .85;
+            color: #003366;
+            user-select: none;
+        }
+        .personaje { width: clamp(5rem, 20vw, 10rem); height: auto; overflow: visible; }
+
+        .bob { animation: bob 2.4s ease-in-out infinite; transform-origin: 50% 100%; }
+        @keyframes bob {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50%      { transform: translateY(-10px) rotate(2deg); }
+        }
+        .gota { animation: gota 2.4s ease-in infinite; }
+        @keyframes gota {
+            0%, 60% { transform: translateY(0); opacity: 1; }
+            100%    { transform: translateY(16px); opacity: 0; }
+        }
+        .pupila { transition: transform .12s ease-out; }
+
+        .error404 h2 { color: #003366; margin: 10px 0; }
+        .error404 p { max-width: 34rem; margin: 0 auto 20px; }
+
+        .acciones { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        .acciones button.btn { border: 0; font: inherit; cursor: pointer; }
+        .acciones button.btn-sec { background: #003366; }
+
+        .excusa {
+            margin: 25px auto 0;
+            max-width: 30rem;
+            padding: 15px;
+            background: #eaf3fc;
+            border: 2px dashed #0078d7;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #003366;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .bob, .gota { animation: none; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>TechNova Solutions</h1>
+    </header>
+
+    <div class="container">
+        <div class="card error404">
+
+            <!-- CSS 3: estilos en línea (atributo style) -->
+            <span style="display:inline-block; background:#003366; color:#fff; font-weight:bold; padding:4px 14px; border-radius:999px;">Error 404</span>
+
+            <div class="numeros">
+                <span class="cuatro" aria-hidden="true">4</span>
+
+                <!-- Dibujo: monstruito asustado cuya boca es el "0" -->
+                <svg class="personaje" viewBox="-14 -4 190 244" role="img" aria-label="Un monstruito azul asustado con la boca abierta en forma de cero">
+                    <g class="bob">
+                        <ellipse cx="58" cy="229" rx="24" ry="8" fill="#003366"/>
+                        <ellipse cx="104" cy="229" rx="24" ry="8" fill="#003366"/>
+                        <path d="M18 130 Q-6 150 10 180" fill="none" stroke="#0078d7" stroke-width="13" stroke-linecap="round"/>
+                        <path d="M142 128 Q172 108 150 74" fill="none" stroke="#0078d7" stroke-width="13" stroke-linecap="round"/>
+                        <path d="M80 8 C128 8 150 70 150 130 C150 190 124 224 80 224 C36 224 10 190 10 130 C10 70 32 8 80 8Z" fill="#0078d7"/>
+                        <path d="M36 64 Q54 54 72 66" fill="none" stroke="#003366" stroke-width="5" stroke-linecap="round"/>
+                        <path d="M88 52 Q108 36 128 50" fill="none" stroke="#003366" stroke-width="5" stroke-linecap="round"/>
+                        <circle cx="55" cy="92" r="17" fill="#fff"/>
+                        <circle cx="106" cy="88" r="21" fill="#fff"/>
+                        <circle class="pupila" id="p1" cx="55" cy="92" r="7" fill="#003366"/>
+                        <circle class="pupila" id="p2" cx="106" cy="88" r="9" fill="#003366"/>
+                        <ellipse cx="80" cy="162" rx="21" ry="29" fill="#003366"/>
+                        <ellipse cx="80" cy="180" rx="11" ry="9" fill="#ff7a93"/>
+                        <path class="gota" d="M132 24 Q146 44 132 54 Q118 44 132 24Z" fill="#7fd8ff" stroke="#0078d7" stroke-width="2"/>
+                        <text x="-12" y="52" font-family="Impact, Arial Black, sans-serif" font-size="40" fill="#003366" transform="rotate(-14 -4 40)">?</text>
+                        <text x="152" y="150" font-family="Impact, Arial Black, sans-serif" font-size="30" fill="#003366" transform="rotate(12 160 140)">?</text>
+                    </g>
+                </svg>
+
+                <span class="cuatro" aria-hidden="true">4</span>
+            </div>
+
+            <h2>Uy, esta página se ha perdido</h2>
+            <p>Hemos buscado por todas partes y solo hemos encontrado polvo y un calcetín solitario. Puede que la dirección esté mal escrita o que la página ya no exista.</p>
+
+            <div class="acciones">
+                <a class="btn" href="index.html">Volver al inicio</a>
+                <button type="button" class="btn btn-sec" id="excusa">Dame una excusa</button>
+            </div>
+
+            <div class="excusa" id="texto" aria-live="polite">Pulsa el botón y te cuento qué ha pasado.</div>
+        </div>
+    </div>
+
+    <footer>&copy; 2026 TechNova Solutions</footer>
+
+    <script>
+        // Los ojos siguen al puntero
+        var pupilas = [
+            { el: document.getElementById("p1"), max: 6 },
+            { el: document.getElementById("p2"), max: 8 }
+        ];
+        var svg = document.querySelector(".personaje");
+        document.addEventListener("pointermove", function (e) {
+            var r = svg.getBoundingClientRect();
+            var dx = e.clientX - (r.left + r.width / 2);
+            var dy = e.clientY - (r.top + r.height * 0.4);
+            var d = Math.hypot(dx, dy) || 1;
+            var k = Math.min(1, d / 200);
+            pupilas.forEach(function (p) {
+                p.el.style.transform = "translate(" + (dx / d * p.max * k) + "px," + (dy / d * p.max * k) + "px)";
+            });
+        });
+
+        // Excusas al azar
+        var excusas = [
+            "La página salió a por tabaco y no ha vuelto.",
+            "Un gato se sentó encima del servidor. Sigue ahí.",
+            "Estaba aquí hace un momento, lo juro.",
+            "Se la comió un bug muy hambriento.",
+            "Se fue de vacaciones a Benidorm sin avisar.",
+            "Alguien tiró del cable. Seguro que fue el becario."
+        ];
+        var ultima = -1;
+        document.getElementById("excusa").addEventListener("click", function () {
+            var i;
+            do { i = Math.floor(Math.random() * excusas.length); } while (i === ultima);
+            ultima = i;
+            document.getElementById("texto").textContent = excusas[i];
+        });
+    </script>
+</body>
+</html>

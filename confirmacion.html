@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Confirmación de pedido - TechNova Solutions</title>
+    <link rel="stylesheet" href="estilos/estilos.css">
+</head>
+<body>
+    <!-- Cabecera: título y menú de navegación (igual en todas las páginas) -->
+    <header>
+        <h1>TechNova Solutions</h1>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="quienes.html">Quiénes somos</a>
+            <a href="donde.html">Dónde estamos</a>
+            <a href="referencias.html">Referencias</a>
+            <a href="tienda.html">Tienda</a>
+            <a href="carrito.html">Carrito</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>Gracias por tu compra.</h2>
+            <p>Su pedido se gestionará lo más rápidamente posible. En breve nos pondremos en contacto con usted para concretar los detalles de su pedido. Gracias.</p>
+        </div>
+    </div>
+
+    <footer>&copy; 2026 TechNova Solutions</footer>
+
+    <script>
+        // El pedido ya está hecho: vaciamos el carrito guardado en el navegador
+        localStorage.removeItem('carrito');
+    </script>
+</body>
+</html>

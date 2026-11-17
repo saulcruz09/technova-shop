@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Carrito - TechNova Solutions</title>
+    <link rel="stylesheet" href="estilos/estilos.css">
+</head>
+<body>
+    <!-- Cabecera: título y menú de navegación (igual en todas las páginas) -->
+    <header>
+        <h1>TechNova Solutions</h1>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="quienes.html">Quiénes somos</a>
+            <a href="donde.html">Dónde estamos</a>
+            <a href="referencias.html">Referencias</a>
+            <a href="tienda.html">Tienda</a>
+            <a href="carrito.html">Carrito</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>Tu carrito</h2>
+            <!-- Aquí el script escribe la lista de productos (o el mensaje de carrito vacío) -->
+            <div id="contenido-carrito"></div>
+
+            <!-- Aquí el script escribe el total -->
+            <h3 id="total-carrito"></h3>
+
+            <!-- Este botón está oculto y solo se muestra si hay productos -->
+            <button type="button" class="btn" id="btn-pedir" style="display:none;"
+                    onclick="location.href='confirmacion.html'">Realizar pedido</button>
+        </div>
+    </div>
+
+    <footer>&copy; 2026 TechNova Solutions</footer>
+
+    <script>
+        // BLOQUE 1: leemos el carrito guardado en localStorage (lista vacía si no hay nada)
+        // y localizamos los elementos de la página que vamos a rellenar
+        const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        const contenedor = document.getElementById('contenido-carrito');
+        const totalElem = document.getElementById('total-carrito');
+        const btnPedir = document.getElementById('btn-pedir');
+
+        if (carrito.length === 0) {
+            // BLOQUE 2: carrito vacío -> mensaje en cursiva y rojo (la clase está en estilos.css)
+            contenedor.innerHTML = '<p class="carrito-vacio">No hay productos en el carrito.</p>';
+        } else {
+            // BLOQUE 3: hay productos -> recorremos la lista, creamos una línea por producto
+            // y vamos sumando los precios en la variable total
+            let total = 0;
+            let html = '<ul class="lista-carrito">';
+            carrito.forEach(item => {
+                html += `<li>${item.nombre} - ${item.precio} €</li>`;
+                total += item.precio;
+            });
+            html += '</ul>';
+
+            // BLOQUE 4: mostramos la lista, el total y el botón de "Realizar pedido"
+            contenedor.innerHTML = html;
+            totalElem.innerText = `TOTAL: ${total} €`;
+            btnPedir.style.display = 'inline-block';
+        }
+    </script>
+</body>
+</html>

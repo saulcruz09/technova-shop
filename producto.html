@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producto - TechNova Solutions</title>
+    <link rel="stylesheet" href="estilos/estilos.css">
+</head>
+<body>
+    <header>
+        <h1>TechNova Solutions</h1>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="quienes.html">Quiénes somos</a>
+            <a href="donde.html">Dónde estamos</a>
+            <a href="referencias.html">Referencias</a>
+            <a href="tienda.html">Tienda</a>
+            <a href="carrito.html">Carrito</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <img id="imagen" src="" alt="" width="400">
+            <h2 id="nombre"></h2>
+            <p id="descripcion"></p>
+            <h3 id="precio"></h3>
+            <p id="stock"></p>
+            <button class="btn" onclick="agregarCarrito()">Añadir al carrito</button>
+        </div>
+    </div>
+
+    <footer>&copy; 2026 TechNova Solutions</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const supabaseUrl = "https://ialoqxiqotvtzyegvxcn.supabase.co";
+        const supabaseKey = "sb_publishable_OjbLHqZNynX8ojbqe_o3uA_zJMTwJdw";
+
+        const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+        let productoActual = null;
+
+        async function cargarProducto() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get("id");
+
+            if (!id) {
+                console.error("No se ha indicado ningún id de producto.");
+                return;
+            }
+
+            const { data, error } = await supabaseClient
+                .from("productos")
+                .select("*")
+                .eq("id", id)
+                .single();
+
+            if (error) {
+                console.error("Error al cargar producto:", error);
+                return;
+            }
+
+            productoActual = data;
+
+            document.getElementById("imagen").src = data.imagen;
+            document.getElementById("imagen").alt = data.nombre;
+            document.getElementById("nombre").textContent = data.nombre;
+            document.getElementById("descripcion").textContent = data.descripcion;
+            document.getElementById("precio").textContent = data.precio + " €";
+            document.getElementById("stock").textContent = "Stock disponible: " + data.stock;
+        }
+
+        function agregarCarrito() {
+            if (!productoActual) return;
+
+            let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+            carrito.push({
+                id: productoActual.id,
+                nombre: productoActual.nombre,
+                precio: parseFloat(productoActual.precio)
+            });
+
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+            alert("Producto añadido al carrito");
+            window.location.href = "carrito.html";
+        }
+
+        cargarProducto();
+    </script>
+</body>
+</html>

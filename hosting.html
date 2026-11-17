@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hosting - TechNova Solutions</title>
+    <link rel="stylesheet" href="estilos/estilos.css">
+</head>
+<body>
+    <!-- Cabecera: título y menú de navegación (igual en todas las páginas) -->
+    <header>
+        <h1>TechNova Solutions</h1>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="quienes.html">Quiénes somos</a>
+            <a href="donde.html">Dónde estamos</a>
+            <a href="referencias.html">Referencias</a>
+            <a href="tienda.html">Tienda</a>
+            <a href="carrito.html">Carrito</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Ficha del producto: imagen, nombre, precio y botón.
+             El script de abajo lee el nombre y el precio de estos elementos (por su id). -->
+        <div class="card producto-detalle">
+            <img src="imagenes/prod3.jpg" alt="Hosting">
+            <h2 id="nombre-producto">Hosting</h2>
+            <p class="precio"><span id="precio-producto">99</span> €</p>
+            <button type="button" class="btn" id="btn-agregar">Añadir al carrito</button>
+        </div>
+    </div>
+
+    <footer>&copy; 2026 TechNova Solutions</footer>
+
+    <script>
+        // BLOQUE 1: cuando el usuario pulsa "Añadir al carrito" se ejecuta todo lo de dentro
+        document.getElementById('btn-agregar').addEventListener('click', () => {
+
+            // BLOQUE 2: creamos un objeto con los datos del producto que se ve en pantalla
+            // (parseFloat convierte el texto "499" en el número 499 para poder sumar después)
+            const producto = {
+                nombre: document.getElementById('nombre-producto').innerText,
+                precio: parseFloat(document.getElementById('precio-producto').innerText)
+            };
+
+            // BLOQUE 3: leemos el carrito guardado en el navegador.
+            // localStorage solo guarda texto, así que JSON.parse lo convierte en lista.
+            // Si todavía no existe ("null"), el || [] hace que empecemos con una lista vacía.
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+            // BLOQUE 4: añadimos el producto y volvemos a guardar el carrito
+            // (JSON.stringify convierte la lista en texto para poder guardarla)
+            carrito.push(producto);
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+
+            // BLOQUE 5: avisamos al usuario y lo llevamos a la página del carrito
+            alert('¡Producto añadido al carrito!');
+            window.location.href = 'carrito.html';
+        });
+    </script>
+</body>
+</html>

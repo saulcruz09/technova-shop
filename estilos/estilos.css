@@ -1,0 +1,60 @@
+/* ===== Base ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Arial, sans-serif; line-height: 1.6; background: #f4f4f4; }
+
+/* ===== Parte superior (fondo azul): letras blancas y tipo Helvetica ===== */
+header {
+    background: #003366;
+    color: #fff;
+    font-family: Helvetica, Arial, sans-serif;
+    padding: 15px;
+}
+nav a { color: #fff; text-decoration: none; margin: 0 10px; font-family: Helvetica, Arial, sans-serif; }
+nav a:hover { text-decoration: underline; }
+
+/* ===== Portada ===== */
+.hero {
+    background: url("../imagenes/fondo.jpg") center/cover;
+    height: 60vh;
+    color: #003366;          /* el fondo es casi blanco: texto oscuro para que se lea */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+/* ===== Estructura general ===== */
+.container { width: 90%; max-width: 1100px; margin: auto; padding: 20px; }
+.card { background: #fff; padding: 15px; margin: 15px 0; border-radius: 8px; }
+footer { background: #003366; color: #fff; text-align: center; padding: 15px; margin-top: 20px; }
+
+/* ===== Botones ===== */
+.btn { display: inline-block; background: #0078d7; color: #fff; padding: 10px 15px; text-decoration: none; border-radius: 5px; }
+button.btn { border: 0; cursor: pointer; font: inherit; }
+
+/* ===== Tienda (listado) ===== */
+.productos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
+.producto img { width: 100%; height: 160px; object-fit: cover; }
+
+/* ===== Página de producto ===== */
+.producto-detalle { text-align: center; }
+.producto-detalle img { width: 100%; max-width: 320px; height: auto; border-radius: 8px; }
+.precio { font-size: 1.8rem; font-weight: bold; color: #003366; margin: 10px 0 20px; }
+
+/* ===== Carrito ===== */
+.lista-carrito { list-style: none; }
+.lista-carrito li { padding: 8px 0; border-bottom: 1px solid #ddd; }
+#total-carrito { margin: 15px 0; color: #003366; }
+.carrito-vacio { color: red; font-style: italic; }   /* mensaje "No hay productos en el carrito." */
+
+/* ===== Formularios ===== */
+form label { display: block; margin-top: 10px; font-weight: bold; }
+form input { width: 100%; padding: 8px; margin-top: 4px; }
+form .btn { margin-top: 15px; }
+
+/* ===== Redes sociales ===== */
+.social img { width: 50px; margin: 5px; }
+.social a { display: inline-block; }
+
+.negro { color: black; }
